@@ -28,12 +28,31 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
+            groupBox1 = new GroupBox();
+            SuspendLayout();
+            // 
+            // groupBox1
+            // 
+            groupBox1.Location = new Point(224, 258);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Size = new Size(250, 125);
+            groupBox1.TabIndex = 0;
+            groupBox1.TabStop = false;
+            groupBox1.Text = "groupBox1";
+            // 
+            // Form1
+            // 
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(groupBox1);
+            Name = "Form1";
             Text = "Form1";
+            ResumeLayout(false);
         }
 
         #endregion
+
+        private GroupBox groupBox1;
     }
 }
