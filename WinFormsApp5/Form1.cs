@@ -17,7 +17,6 @@ namespace Server
         private Thread? _serverThread;
         private bool _isRunning = false;
 
-        // Словник: назва товару -> (ціна, кількість)
         private Dictionary<string, (decimal Price, int Quantity)> _products =
             new Dictionary<string, (decimal, int)>(StringComparer.OrdinalIgnoreCase);
 
@@ -26,7 +25,7 @@ namespace Server
             InitializeComponent();
         }
 
-        // Кнопка "Огляд" - вибір Excel файлу
+
         private void btnBrowse_Click(object sender, EventArgs e)
         {
             using OpenFileDialog dialog = new OpenFileDialog();
@@ -39,7 +38,7 @@ namespace Server
             }
         }
 
-        // Завантажити Excel файл у словник
+
         private bool LoadExcel(string path)
         {
             try
@@ -50,7 +49,10 @@ namespace Server
                 using var package = new ExcelPackage(new FileInfo(path));
                 var sheet = package.Workbook.Worksheets[0];
 
-                int row = 2; // Рядок 1 - заголовок, починаємо з 2
+
+                int row = 2;
+
+
                 while (sheet.Cells[row, 1].Value != null)
                 {
                     string name = sheet.Cells[row, 1].Value.ToString()!.Trim();
@@ -72,7 +74,7 @@ namespace Server
             }
         }
 
-        // Кнопка "Запустити / Зупинити"
+
         private void btnStartStop_Click(object sender, EventArgs e)
         {
             if (_isRunning)
@@ -83,7 +85,7 @@ namespace Server
 
         private void StartServer()
         {
-            // Перевірка файлу
+
             if (string.IsNullOrWhiteSpace(txtFilePath.Text) || !File.Exists(txtFilePath.Text))
             {
                 MessageBox.Show("Будь ласка, вкажіть правильний шлях до Excel файлу!", "Увага",
@@ -91,7 +93,7 @@ namespace Server
                 return;
             }
 
-            // Перевірка порту
+
             if (!int.TryParse(txtPort.Text, out int port) || port < 1 || port > 65535)
             {
                 MessageBox.Show("Вкажіть правильний порт (від 1 до 65535)!", "Увага",
@@ -99,7 +101,7 @@ namespace Server
                 return;
             }
 
-            // Завантажити Excel
+
             if (!LoadExcel(txtFilePath.Text))
                 return;
 
@@ -109,7 +111,7 @@ namespace Server
                 _server.Start();
                 _isRunning = true;
 
-                // Оновлення UI
+
                 btnStartStop.Text = "⏹ Зупинити сервер";
                 btnStartStop.BackColor = System.Drawing.Color.FromArgb(192, 57, 57);
                 lblStatus.Text = $"🟢 Сервер працює на порту {port}";
@@ -118,7 +120,7 @@ namespace Server
                 txtPort.Enabled = false;
                 btnBrowse.Enabled = false;
 
-                // Запуск потоку для прийому клієнтів
+
                 _serverThread = new Thread(ListenForClients);
                 _serverThread.IsBackground = true;
                 _serverThread.Start();
@@ -137,7 +139,7 @@ namespace Server
             _isRunning = false;
             _server?.Stop();
 
-            // Оновлення UI
+
             btnStartStop.Text = "▶ Запустити сервер";
             btnStartStop.BackColor = System.Drawing.Color.FromArgb(41, 128, 185);
             lblStatus.Text = "🔴 Сервер зупинено";
@@ -149,7 +151,7 @@ namespace Server
             Log("⏹ Сервер зупинено");
         }
 
-        // Очікуємо підключення нових клієнтів
+
         private void ListenForClients()
         {
             while (_isRunning)
@@ -160,19 +162,18 @@ namespace Server
                     string clientIp = ((IPEndPoint)client.Client.RemoteEndPoint!).Address.ToString();
                     Log($"📡 Підключився клієнт: {clientIp}");
 
-                    // Кожен клієнт - у своєму потоці
                     Thread clientThread = new Thread(() => HandleClient(client, clientIp));
                     clientThread.IsBackground = true;
                     clientThread.Start();
                 }
                 catch
                 {
-                    // Сервер зупинено - виходимо з циклу
+
                 }
             }
         }
 
-        // Обробка одного клієнта
+
         private void HandleClient(TcpClient client, string clientIp)
         {
             try
@@ -231,13 +232,13 @@ namespace Server
             }
         }
 
-        // Кнопка "Очистити лог"
+
         private void btnClearLog_Click(object sender, EventArgs e)
         {
             rtbLog.Clear();
         }
 
-        // Безпечне додавання тексту в лог (з іншого потоку)
+
         private void Log(string message)
         {
             if (rtbLog.InvokeRequired)
@@ -254,6 +255,11 @@ namespace Server
         {
             if (_isRunning)
                 StopServer();
+        }
+
+        private void pnlHeader_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

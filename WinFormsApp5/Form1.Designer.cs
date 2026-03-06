@@ -4,7 +4,7 @@
     {
         private System.ComponentModel.IContainer components = null;
 
-        // Контролі
+
         private System.Windows.Forms.Panel pnlHeader;
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.Label lblSubtitle;
@@ -68,8 +68,9 @@
             pnlHeader.Location = new Point(0, 0);
             pnlHeader.Name = "pnlHeader";
             pnlHeader.Padding = new Padding(20, 0, 0, 0);
-            pnlHeader.Size = new Size(684, 70);
+            pnlHeader.Size = new Size(682, 79);
             pnlHeader.TabIndex = 1;
+            pnlHeader.Paint += pnlHeader_Paint;
             // 
             // lblTitle
             // 
@@ -78,7 +79,7 @@
             lblTitle.ForeColor = Color.White;
             lblTitle.Location = new Point(20, 12);
             lblTitle.Name = "lblTitle";
-            lblTitle.Size = new Size(215, 28);
+            lblTitle.Size = new Size(268, 35);
             lblTitle.TabIndex = 0;
             lblTitle.Text = "🗄 Товарний сервер";
             // 
@@ -89,7 +90,7 @@
             lblSubtitle.ForeColor = Color.FromArgb(210, 235, 255);
             lblSubtitle.Location = new Point(23, 42);
             lblSubtitle.Name = "lblSubtitle";
-            lblSubtitle.Size = new Size(234, 15);
+            lblSubtitle.Size = new Size(294, 20);
             lblSubtitle.TabIndex = 1;
             lblSubtitle.Text = "Сервер для пошуку товарів з Excel файлу";
             // 
@@ -101,10 +102,10 @@
             pnlMain.Controls.Add(lblStatus);
             pnlMain.Controls.Add(grpLog);
             pnlMain.Dock = DockStyle.Fill;
-            pnlMain.Location = new Point(0, 70);
+            pnlMain.Location = new Point(0, 79);
             pnlMain.Name = "pnlMain";
             pnlMain.Padding = new Padding(20, 15, 20, 15);
-            pnlMain.Size = new Size(684, 491);
+            pnlMain.Size = new Size(682, 474);
             pnlMain.TabIndex = 0;
             // 
             // grpFile
@@ -128,7 +129,7 @@
             lblFileLabel.ForeColor = Color.FromArgb(80, 80, 80);
             lblFileLabel.Location = new Point(15, 30);
             lblFileLabel.Name = "lblFileLabel";
-            lblFileLabel.Size = new Size(94, 15);
+            lblFileLabel.Size = new Size(116, 20);
             lblFileLabel.TabIndex = 0;
             lblFileLabel.Text = "Шлях до файлу:";
             // 
@@ -141,7 +142,7 @@
             txtFilePath.Name = "txtFilePath";
             txtFilePath.PlaceholderText = "Оберіть файл...";
             txtFilePath.ReadOnly = true;
-            txtFilePath.Size = new Size(400, 24);
+            txtFilePath.Size = new Size(400, 29);
             txtFilePath.TabIndex = 1;
             // 
             // btnBrowse
@@ -180,7 +181,7 @@
             lblPortLabel.ForeColor = Color.FromArgb(80, 80, 80);
             lblPortLabel.Location = new Point(15, 30);
             lblPortLabel.Name = "lblPortLabel";
-            lblPortLabel.Size = new Size(85, 15);
+            lblPortLabel.Size = new Size(108, 20);
             lblPortLabel.TabIndex = 0;
             lblPortLabel.Text = "Порт сервера:";
             // 
@@ -191,7 +192,7 @@
             txtPort.Font = new Font("Segoe UI", 9.5F);
             txtPort.Location = new Point(115, 27);
             txtPort.Name = "txtPort";
-            txtPort.Size = new Size(100, 24);
+            txtPort.Size = new Size(100, 29);
             txtPort.TabIndex = 1;
             txtPort.Text = "5000";
             // 
@@ -218,7 +219,7 @@
             lblStatus.ForeColor = Color.FromArgb(192, 57, 57);
             lblStatus.Location = new Point(235, 205);
             lblStatus.Name = "lblStatus";
-            lblStatus.Size = new Size(156, 19);
+            lblStatus.Size = new Size(182, 23);
             lblStatus.TabIndex = 3;
             lblStatus.Text = "🔴 Сервер зупинено";
             // 
@@ -231,7 +232,7 @@
             grpLog.ForeColor = Color.FromArgb(44, 62, 80);
             grpLog.Location = new Point(20, 250);
             grpLog.Name = "grpLog";
-            grpLog.Size = new Size(641, 229);
+            grpLog.Size = new Size(638, 238);
             grpLog.TabIndex = 4;
             grpLog.TabStop = false;
             grpLog.Text = " 📋 Журнал подій";
@@ -246,7 +247,7 @@
             rtbLog.Location = new Point(10, 25);
             rtbLog.Name = "rtbLog";
             rtbLog.ReadOnly = true;
-            rtbLog.Size = new Size(621, 159);
+            rtbLog.Size = new Size(617, 194);
             rtbLog.TabIndex = 0;
             rtbLog.Text = "";
             // 
@@ -259,7 +260,7 @@
             btnClearLog.FlatStyle = FlatStyle.Flat;
             btnClearLog.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             btnClearLog.ForeColor = Color.White;
-            btnClearLog.Location = new Point(10, 192);
+            btnClearLog.Location = new Point(10, 227);
             btnClearLog.Name = "btnClearLog";
             btnClearLog.Size = new Size(150, 30);
             btnClearLog.TabIndex = 1;
@@ -270,7 +271,7 @@
             // Form1
             // 
             BackColor = Color.FromArgb(245, 246, 250);
-            ClientSize = new Size(684, 561);
+            ClientSize = new Size(682, 553);
             Controls.Add(pnlMain);
             Controls.Add(pnlHeader);
             Font = new Font("Segoe UI", 9.5F);
@@ -289,6 +290,7 @@
             grpPort.PerformLayout();
             grpLog.ResumeLayout(false);
             ResumeLayout(false);
+
         }
     }
 }
